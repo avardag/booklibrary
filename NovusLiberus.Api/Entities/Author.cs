@@ -13,8 +13,8 @@ public class Author
     [Required]
     [StringLength(64, ErrorMessage = "Last Name must be from 0 to 64 characters long")]
     public string LastName { get; set; }
-    public DateTime DateOfBirth { get; set; }
-    public DateTime DateOfDeath { get; set; }
+    public DateTime? DateOfBirth { get; set; }
+    public DateTime? DateOfDeath { get; set; }
     
     public List<Book> Books { get; set; }
 }
