@@ -1,0 +1,6 @@
+@NovusLiberus.Api_HostAddress = http://localhost:5115
+
+GET {{NovusLiberus.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
