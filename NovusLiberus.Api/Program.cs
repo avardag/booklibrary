@@ -3,6 +3,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using NovusLiberus.Api.Data;
 using NovusLiberus.Api.DTOs;
+using NovusLiberus.Api.DTOs.AuthorDtos;
 using NovusLiberus.Api.RouteBuilderExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,6 +43,7 @@ app.UseHttpsRedirection();
 
 
 app.MapAuthorsEndpoints();
+app.MapUsersEndpoints();
 
 
 app.Run();

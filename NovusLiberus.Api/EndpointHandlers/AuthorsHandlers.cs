@@ -3,21 +3,21 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NovusLiberus.Api.Data;
-using NovusLiberus.Api.DTOs;
+using NovusLiberus.Api.DTOs.AuthorDtos;
 using NovusLiberus.Api.Entities;
 
 namespace NovusLiberus.Api.EndpointHandlers;
 
 public static class AuthorsHandlers
 {
-    public static async Task<Ok<IEnumerable<AuthorDto>>> GetAllAuthorsAsync (DataContext dishesBdContext,
+    public static async Task<Ok<IEnumerable<AuthorDto>>> GetAllAuthorsAsync (DataContext dataContext,
     IMapper mapper,
     ILogger<AuthorDto> logger,
     [FromQuery] string? name) 
     {
         logger.LogInformation("Getting the authors...");
-        var dishes = await dishesBdContext.Authors.Where(d => name == null || d.FirstName.Contains(name) || d.LastName.Contains(name)).ToListAsync();
-        var mappedAuthors =  mapper.Map<IEnumerable<AuthorDto>>(dishes);
+        var authors = await dataContext.Authors.Where(d => name == null || d.FirstName.Contains(name) || d.LastName.Contains(name)).ToListAsync();
+        var mappedAuthors =  mapper.Map<IEnumerable<AuthorDto>>(authors);
         return TypedResults.Ok(mappedAuthors);
     }
     
@@ -40,7 +40,7 @@ public static class AuthorsHandlers
         IMapper mapper,
         string authorName)
     {
-        var author = await dataContext.Authors.FirstOrDefaultAsync(d => d.LastName.ToLower() == authorName.ToLower());
+        var author = await dataContext.Authors.FirstOrDefaultAsync(d => d.LastName.ToLower().Contains(authorName.ToLower()) || d.FirstName.ToLower().Contains(authorName.ToLower()));
         if (author == null)
         {
             return TypedResults.NotFound();

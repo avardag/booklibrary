@@ -1,4 +1,4 @@
-namespace NovusLiberus.Api.DTOs;
+namespace NovusLiberus.Api.DTOs.AuthorDtos;
 
 public record AuthorDto(
     int Id,

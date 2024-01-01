@@ -14,10 +14,9 @@ public class User
     [StringLength(64)]
     public string LastName { get; set; }
     [Required]
-    [EmailAddress(ErrorMessage = "Invalid email address")]
     public string Email { get; set; }
     public DateTime DateOfBirth { get; set; }
-    public string Phone { get; set; }
+    public string? Phone { get; set; }
     [Required]
     public Guid LibraryCardNumber { get; set; }
     

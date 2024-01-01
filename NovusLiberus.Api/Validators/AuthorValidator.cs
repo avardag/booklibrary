@@ -1,5 +1,6 @@
 using FluentValidation;
 using NovusLiberus.Api.DTOs;
+using NovusLiberus.Api.DTOs.AuthorDtos;
 
 namespace NovusLiberus.Api.Validators;
 
