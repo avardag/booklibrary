@@ -44,6 +44,7 @@ app.UseHttpsRedirection();
 
 app.MapAuthorsEndpoints();
 app.MapUsersEndpoints();
+app.MapGenresEndpoints();
 
 
 app.Run();
