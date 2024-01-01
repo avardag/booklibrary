@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using NovusLiberus.Api.Data;
+using NovusLiberus.Api.DTOs;
 using NovusLiberus.Api.RouteBuilderExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +25,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 //Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+//add fluent validation for assemblies containing CreateAuthorDto
+builder.Services.AddValidatorsFromAssemblyContaining(typeof(CreateAuthorDto));
 
 var app = builder.Build();
 
@@ -34,6 +38,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 
 app.MapAuthorsEndpoints();
 
