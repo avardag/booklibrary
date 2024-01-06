@@ -21,7 +21,7 @@ public static class AuthorsHandlers
         return TypedResults.Ok(mappedAuthors);
     }
     
-    public static async Task<Results<NotFound, Ok<AuthorDetailsDto>>> GetAuthorByIdAsync (DataContext dataContext,
+    public static async Task<Results<NotFound, Ok<AuthorDto>>> GetAuthorByIdAsync (DataContext dataContext,
         IMapper mapper,
         int authorId)
     {
@@ -31,7 +31,7 @@ public static class AuthorsHandlers
         {
             return TypedResults.NotFound();
         }
-        var mappedAuthor = mapper.Map<AuthorDetailsDto>(author);
+        var mappedAuthor = mapper.Map<AuthorDto>(author);
         return TypedResults.Ok(mappedAuthor);
     }
     
@@ -48,7 +48,7 @@ public static class AuthorsHandlers
         return TypedResults.Ok(mapper.Map<AuthorDto>(author));
     }
     
-    public static async Task<CreatedAtRoute<AuthorDetailsDto>> CreateAuthorAsync(DataContext dataContext,
+    public static async Task<CreatedAtRoute<AuthorDto>> CreateAuthorAsync(DataContext dataContext,
         IMapper mapper,
         CreateAuthorDto createAuthorDto) 
     {
@@ -57,7 +57,7 @@ public static class AuthorsHandlers
         dataContext.Add(author);
         await dataContext.SaveChangesAsync();
     
-        var authorToReturn = mapper.Map<AuthorDetailsDto>(author);
+        var authorToReturn = mapper.Map<AuthorDto>(author);
         return TypedResults.CreatedAtRoute(
             authorToReturn,
             "GetAuthor",

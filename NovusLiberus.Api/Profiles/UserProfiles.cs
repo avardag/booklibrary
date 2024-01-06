@@ -9,7 +9,6 @@ public class UserProfiles:Profile
     public UserProfiles()
     {
         CreateMap<User, UserDto>();
-        CreateMap<User, UserDetailsDto>();
         CreateMap<CreateUserDto, User>()
             .ForMember(dest => dest.LibraryCardNumber,
                 opt => opt.MapFrom((src,

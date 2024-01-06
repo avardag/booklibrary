@@ -32,12 +32,7 @@ public static class AuthorEndpointRouteBuilderExtensions
             .WithSummary("Gets author by providing ID");
         authorsEndpoints.MapGet("/{authorName}", AuthorsHandlers.GetAuthorByNameAsync)
             .AllowAnonymous()
-            .WithSummary("Gets author by providing name")
-            .WithOpenApi(operation =>
-            {
-                operation.Deprecated = true;
-                return operation;
-            });
+            .WithSummary("Gets author by providing name");
         authorsEndpoints.MapPost("/", AuthorsHandlers.CreateAuthorAsync)
             .AddEndpointFilter<ValidationFilterGeneric<CreateAuthorDto>>()
             .ProducesValidationProblem(400)

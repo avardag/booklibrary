@@ -20,7 +20,7 @@ public static class UsersHandlers
         return TypedResults.Ok(mappedUsers);
     }
     
-    public static async Task<Results<NotFound, Ok<UserDetailsDto>>> GetUserByIdAsync (DataContext dataContext,
+    public static async Task<Results<NotFound, Ok<UserDto>>> GetUserByIdAsync (DataContext dataContext,
         IMapper mapper,
         int userId)
     {
@@ -30,7 +30,7 @@ public static class UsersHandlers
         {
             return TypedResults.NotFound();
         }
-        var mappedUser = mapper.Map<UserDetailsDto>(user);
+        var mappedUser = mapper.Map<UserDto>(user);
         return TypedResults.Ok(mappedUser);
     }
     
@@ -46,7 +46,7 @@ public static class UsersHandlers
         return TypedResults.Ok(mapper.Map<UserDto>(user));
     }
     
-    public static async Task<CreatedAtRoute<UserDetailsDto>> CreateUserAsync(DataContext dataContext,
+    public static async Task<CreatedAtRoute<UserDto>> CreateUserAsync(DataContext dataContext,
         IMapper mapper,
         CreateUserDto createUserDto) 
     {
@@ -56,7 +56,7 @@ public static class UsersHandlers
         dataContext.Add((object)user);
         await dataContext.SaveChangesAsync();
     
-        var userToReturn = mapper.Map<UserDetailsDto>(user);
+        var userToReturn = mapper.Map<UserDto>(user);
         return TypedResults.CreatedAtRoute(
             userToReturn,
             "GetUser",

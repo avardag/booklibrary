@@ -9,7 +9,6 @@ public class AuthorProfiles:Profile
     public AuthorProfiles()
     {
         CreateMap<Author, AuthorDto>();
-        CreateMap<Author, AuthorDetailsDto>();
         CreateMap<CreateAuthorDto, Author>();
         // CreateMap<DishForUpdateDto, Dish>();
     }
