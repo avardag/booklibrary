@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NovusLiberus.Api.Data;
 
@@ -11,9 +12,11 @@ using NovusLiberus.Api.Data;
 namespace NovusLiberus.Api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240106210848_AddTriggerBookRating")]
+    partial class AddTriggerBookRating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,7 +159,7 @@ namespace NovusLiberus.Api.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<DateTime?>("ReturnDate")
+                    b.Property<DateTime>("ReturnDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
@@ -200,12 +203,8 @@ namespace NovusLiberus.Api.Migrations
 
                     b.ToTable("Reviews", t =>
                         {
-                            t.HasTrigger("UpdateBookRating");
-
                             t.HasCheckConstraint("CK_Review_Rating_Between_1_and_5", "Rating >= 1 AND Rating <= 5");
                         });
-
-                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
                 });
 
             modelBuilder.Entity("NovusLiberus.Api.Entities.User", b =>

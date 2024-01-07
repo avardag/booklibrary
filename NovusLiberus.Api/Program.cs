@@ -46,6 +46,8 @@ app.MapAuthorsEndpoints();
 app.MapUsersEndpoints();
 app.MapGenresEndpoints();
 app.MapBooksEndpoints();
+app.MapReviewsEndpoints();
+app.MapLoansEndpoints();
 
 
 app.Run();

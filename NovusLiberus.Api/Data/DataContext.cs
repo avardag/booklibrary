@@ -21,8 +21,11 @@ public class DataContext: DbContext
     {
         modelBuilder
             .Entity<Review>()
-            .ToTable(b => b.HasCheckConstraint("CK_Review_Rating_Between_1_and_5", "Rating >= 1 AND Rating <= 5"));
-        
+            .ToTable(b => b.HasCheckConstraint("CK_Review_Rating_Between_1_and_5", "Rating >= 1 AND Rating <= 5"))
+            .ToTable(tb => tb.HasTrigger("UpdateBookRating"));
+        // modelBuilder
+        //     .Entity<Review>()
+        //     .ToTable(tb => tb.HasTrigger("UpdateBookRating"));
         modelBuilder.Entity<Loan>()
             .Property(p=>p.LoanDate)
             .HasDefaultValueSql("GETDATE()");

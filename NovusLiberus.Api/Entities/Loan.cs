@@ -17,7 +17,7 @@ public class Loan
     public DateTime LoanDate {get; set;}
     [Required]
     public DateTime DueDate {get; set;}
-    public DateTime ReturnDate {get; set;}
+    public DateTime? ReturnDate {get; set;} //if book has returnDate, then borrowing is closed
   
     public int BookId {get; set;}
     public Book Book {get; set;}
