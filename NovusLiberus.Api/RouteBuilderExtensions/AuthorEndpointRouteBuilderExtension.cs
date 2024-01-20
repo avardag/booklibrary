@@ -51,6 +51,11 @@ public static class AuthorEndpointRouteBuilderExtensions
             .ProducesValidationProblem(400)
             .WithSummary("Edits, updates author by providing ID");
         authorsWithIntIdAndLockFilters.MapDelete("/", AuthorsHandlers.DeleteAuthorAsync)
-            .WithSummary("Deletes author by providing ID");
+            .WithSummary("Deletes author by providing ID.")
+            .WithDescription("Functional, but do not expose this endpoint to the frontend. Deleting authors and books is bad decision.")
+            .WithOpenApi(operation => new(operation)
+            {
+                Deprecated = true
+            });
     }
 }

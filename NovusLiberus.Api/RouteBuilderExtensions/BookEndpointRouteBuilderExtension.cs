@@ -39,7 +39,12 @@ public static class BookEndpointRouteBuilderExtension
             .WithSummary("Edits, updates book by providing ID.")
             .WithDescription("Edits only book info. For editing authors and genres use respective routes");
         booksWithIntIdAndLockFilters.MapDelete("/", BooksHandlers.DeleteBookAsync)
-            .WithSummary("Deletes book by providing ID");
+            .WithSummary("Deletes book by providing ID")
+            .WithDescription("Functional, but do not expose this endpoint to the frontend. Deleting authors and books is bad decision.")
+            .WithOpenApi(operation => new(operation)
+            {
+                Deprecated = true
+            });
         bookWithIdEndpoints.MapPost("/authors/add/{authorId:int}", BooksHandlers.AddOrRemoveAuthorToABookAsync)
             .WithSummary("Add an author to a book, provide book id and author id");
         bookWithIdEndpoints.MapPost("/authors/remove/{authorId:int}", BooksHandlers.AddOrRemoveAuthorToABookAsync)

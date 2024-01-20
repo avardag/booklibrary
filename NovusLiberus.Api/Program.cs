@@ -6,6 +6,9 @@ using NovusLiberus.Api.DTOs;
 using NovusLiberus.Api.DTOs.AuthorDtos;
 using NovusLiberus.Api.RouteBuilderExtensions;
 
+// DotNetEnv.Env.Load(".env");
+DotNetEnv.Env.Load();
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -21,7 +24,8 @@ builder.Services.ConfigureHttpJsonOptions(opts =>
 //DB
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("NovusLiberusDbConnection"))
+    // options.UseSqlServer(builder.Configuration.GetConnectionString("NovusLiberusDbConnection"))
+    options.UseSqlServer(DotNetEnv.Env.GetString("AZURE_DB_CONNECTION_STRING"))
         .EnableSensitiveDataLogging();
     // .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
